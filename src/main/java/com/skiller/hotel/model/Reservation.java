@@ -19,7 +19,6 @@ public class Reservation {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @Column(unique = true)
     private String customerName;
 
     @Column(nullable = false)
@@ -27,7 +26,6 @@ public class Reservation {
 
     @Column(nullable = false)
     private LocalDate checkOutDate;
-
 
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "FK_RESERVATION_ROOM"))
