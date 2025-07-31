@@ -46,8 +46,9 @@ public class RoomController {
 
     @PutMapping("/{id}")
     public ResponseEntity<RoomDTO> update(@Valid @RequestBody RoomDTO dto, @PathVariable("id") Integer id) throws Exception{
+        Room room = service.findById(id);
+        dto.setId(room.getId());
         Room obj = service.update(mapperUtil.map(dto, Room.class), id);
-
         return ResponseEntity.ok().body(mapperUtil.map(obj, RoomDTO.class));
     }
 
