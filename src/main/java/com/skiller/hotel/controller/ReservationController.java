@@ -23,7 +23,6 @@ import java.util.List;
 public class ReservationController {
 
     private final IReservationService service;
-    private final IRoomService roomService;
 
     private final MapperUtil mapperUtil;
 
@@ -42,20 +41,15 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<Void> save(@Valid @RequestBody ReservationDTO dto) throws Exception{
-        roomService.findById(dto.getRoomId());
-        Reservation obj = service.save(mapperUtil.map(dto, Reservation.class));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        Reservation reservation = service.create(dto);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(reservation.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ReservationDTO> update(@Valid @RequestBody ReservationDTO dto, @PathVariable("id") Integer id) throws Exception{
-        Reservation reservation = service.findById(id);
-        roomService.findById(dto.getRoomId());
-        dto.setId(reservation.getId());
-        Reservation obj = service.update(mapperUtil.map(dto, Reservation.class), id);
-
-        return ResponseEntity.ok().body(mapperUtil.map(obj, ReservationDTO.class));
+        Reservation reservation = service.update(id,dto);
+        return ResponseEntity.ok().body(mapperUtil.map(reservation, ReservationDTO.class));
     }
 
     @DeleteMapping("/{id}")

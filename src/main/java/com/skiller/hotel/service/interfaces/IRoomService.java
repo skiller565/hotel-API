@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface IRoomService extends ICRUDService<Room, Integer>{
     Page<Room> listPage(Pageable pageable);
+    Room updateAvailability(Integer id) throws Exception;
 }
