@@ -23,4 +23,11 @@ public class IRoomServiceImpl extends CRUDServiceImpl<Room, Integer> implements 
     public Page<Room> listPage(Pageable pageable) {
         return roomRepository.findAll(pageable);
     }
+
+    @Override
+    public Room updateAvailability(Integer id) throws Exception {
+        Room room = this.findById(id);
+        room.setAvailable(false);
+        return this.save(room);
+    }
 }
