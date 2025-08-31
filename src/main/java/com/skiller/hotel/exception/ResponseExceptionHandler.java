@@ -40,7 +40,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         String msg = ex.getBindingResult().getFieldErrors().stream()
-                .map(err -> err.getField().concat(":").concat(err.getDefaultMessage())).collect(Collectors.joining(","));
+                .map(err -> err.getField().concat(": ").concat(err.getDefaultMessage())).collect(Collectors.joining(","));
 
         CustomErrorRecord err = new CustomErrorRecord(LocalDateTime.now(), msg, request.getDescription(false));
 
