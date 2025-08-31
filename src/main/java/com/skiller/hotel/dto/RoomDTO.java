@@ -19,7 +19,7 @@ public class RoomDTO {
     private String number;
 
     @NotBlank
-    @Size(min = 5, max = 10, message = "{type.size}")
+    @Size(min = 4, max = 10, message = "{type.size}")
     private String type;
 
     @NotNull

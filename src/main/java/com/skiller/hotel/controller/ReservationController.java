@@ -23,12 +23,17 @@ import java.util.List;
 public class ReservationController {
 
     private final IReservationService service;
+    private final IRoomService roomService;
 
     private final MapperUtil mapperUtil;
 
     @GetMapping
     public ResponseEntity<List<ReservationDTO>> findAll() throws Exception{
         List<ReservationDTO> list = mapperUtil.mapList(service.findAll(), ReservationDTO.class);
+        for (ReservationDTO reservation : list) {
+            Room room = roomService.findById(reservation.getRoomId());
+            reservation.setRoomNumber(room.getNumber());
+        }
         return ResponseEntity.ok().body(list);
     }
 
