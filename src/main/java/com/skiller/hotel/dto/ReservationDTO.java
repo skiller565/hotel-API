@@ -28,4 +28,6 @@ public class ReservationDTO {
 
     @NotNull
     private Integer roomId;
+
+    private String roomNumber;
 }

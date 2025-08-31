@@ -49,7 +49,7 @@ public class IReservationServiceImpl extends CRUDServiceImpl<Reservation, Intege
     public Reservation update(Integer id, ReservationDTO dto) throws Exception {
         Reservation reservation = this.findById(id);
         Room room = roomService.findById(dto.getRoomId());
-        if(Boolean.FALSE.equals(room.getAvailable())){
+        if(reservation.getRoom().getId() != room.getId() && Boolean.FALSE.equals(  room.getAvailable())){
             throw new IllegalArgumentException("La habitación ya esta reservada");
         }
         checkDateRange(dto.getCheckInDate(), dto.getCheckOutDate());
