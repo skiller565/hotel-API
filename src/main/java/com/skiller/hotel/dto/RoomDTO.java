@@ -15,11 +15,11 @@ public class RoomDTO {
     private Integer id;
 
     @NotBlank
-    @Size(min = 1, max = 3, message = "{number.size}")
+    @Size(min = 1, max = 3, message = "The field must contain a positive number.")
     private String number;
 
     @NotBlank
-    @Size(min = 4, max = 10, message = "{type.size}")
+    @Size(min = 4, max = 10, message = "The field must have at least 4 characters.")
     private String type;
 
     @NotNull

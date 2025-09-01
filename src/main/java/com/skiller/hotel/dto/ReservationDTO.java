@@ -17,7 +17,7 @@ public class ReservationDTO {
     private Integer id;
 
     @NotBlank
-    @Size(min = 2, max = 100, message = "{customerName.size}")
+    @Size(min = 2, max = 100, message = "The name must have at least 2 characters.")
     private String customerName;
 
     @NotNull
